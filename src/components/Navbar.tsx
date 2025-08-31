@@ -1,11 +1,13 @@
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useMobile } from '@/hooks/use-mobile';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
+  const isMobile = useMobile();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -58,8 +60,8 @@ export default function Navbar() {
       }}
       animate={hidden ? "hidden" : "visible"}
     >
-      <div className="glass-navbar mx-4 mt-4 rounded-2xl border border-purple-500/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="glass-navbar mx-2 xs:mx-4 mt-2 xs:mt-4 rounded-xl xs:rounded-2xl border border-purple-500/30">
+        <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <motion.div
@@ -81,7 +83,7 @@ export default function Navbar() {
                 }
               }}
             >
-              <span className="text-xl sm:text-2xl font-bold text-gradient-primary">
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gradient-primary">
                 Portfolio
               </span>
             </motion.div>

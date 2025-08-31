@@ -133,7 +133,7 @@ export default function ContactSection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Decorative Text */}
           <motion.div
@@ -161,7 +161,7 @@ export default function ContactSection() {
                 ✦
               </motion.div>
 
-              <h2 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 THANK
                 <br />
                 <span className="text-white/95">YOU!</span>

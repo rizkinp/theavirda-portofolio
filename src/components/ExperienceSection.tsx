@@ -110,9 +110,9 @@ export default function ExperienceSection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 px-2 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -128,14 +128,14 @@ export default function ExperienceSection() {
 
         {/* Work Experience */}
         <motion.div
-          className="mb-12 sm:mb-16"
+          className="mb-8 sm:mb-12 lg:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gradient-primary">Work Experience</h3>
-          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 lg:mb-8 text-gradient-primary px-2 sm:px-0">Work Experience</h3>
+          <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-1 md:grid-cols-2">
             {workExperience.map((job, index) => (
               <motion.div
                 key={index}
@@ -170,12 +170,12 @@ export default function ExperienceSection() {
                 }}
                 viewport={{ once: true }}
               >
-                <Card className="p-4 sm:p-6 h-full ultra-smooth-card border-purple-500/40">
-                  <div className="flex items-start gap-3 sm:gap-4">
+                <Card className="p-3 sm:p-4 lg:p-6 h-full ultra-smooth-card border-purple-500/40">
+                  <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
                     <motion.img 
                       src={job.logo} 
                       alt={job.company}
-                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl object-cover flex-shrink-0 silky-image"
+                      className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl object-cover flex-shrink-0 silky-image"
                       whileHover={{ 
                         scale: 1.08, 
                         rotate: 3,
@@ -187,10 +187,13 @@ export default function ExperienceSection() {
                       }}
                     />
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-lg sm:text-xl font-bold text-white mb-1 truncate">{job.company}</h4>
-                      <p className="text-purple-300 font-semibold mb-2 text-sm sm:text-base">{job.position}</p>
-                      <p className="text-white/90 mb-3 text-sm sm:text-base leading-relaxed">{job.description}</p>
-                      <span className="text-xs sm:text-sm text-white/80 bg-purple-500/20 px-3 py-1 rounded-full border border-purple-400/40">
+                      <h4 className="text-sm xs:text-base sm:text-lg lg:text-xl font-bold text-white mb-1 leading-tight">
+                        <span className="block sm:hidden">{job.company.length > 25 ? job.company.substring(0, 25) + '...' : job.company}</span>
+                        <span className="hidden sm:block">{job.company}</span>
+                      </h4>
+                      <p className="text-purple-300 font-semibold mb-2 text-xs xs:text-sm sm:text-base leading-tight">{job.position}</p>
+                      <p className="text-white/90 mb-2 sm:mb-3 text-xs xs:text-sm sm:text-base leading-relaxed line-clamp-3 sm:line-clamp-none">{job.description}</p>
+                      <span className="inline-block text-xs sm:text-sm text-white/80 bg-purple-500/20 px-2 sm:px-3 py-1 rounded-full border border-purple-400/40 text-center">
                         {job.duration}
                       </span>
                     </div>
@@ -203,14 +206,14 @@ export default function ExperienceSection() {
 
         {/* Education */}
         <motion.div
-          className="mb-12 sm:mb-16"
+          className="mb-8 sm:mb-12 lg:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gradient-primary">Education</h3>
-          <div className="max-w-md">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 lg:mb-8 text-gradient-primary px-2 sm:px-0">Education</h3>
+          <div className="max-w-full sm:max-w-2xl lg:max-w-3xl">
             {education.map((edu, index) => (
               <motion.div
                 key={index}
@@ -282,8 +285,8 @@ export default function ExperienceSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gradient-primary">Tools & Technologies</h3>
-          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 lg:mb-8 text-gradient-primary px-2 sm:px-0">Tools & Technologies</h3>
+          <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
             {Object.entries(tools).map(([category, toolList], categoryIndex) => (
               <motion.div
                 key={category}
@@ -310,13 +313,13 @@ export default function ExperienceSection() {
                   }
                 }}
               >
-                <Card className="p-4 sm:p-6 h-full ultra-smooth-card border-purple-500/40">
-                  <h4 className="text-base sm:text-lg font-bold text-purple-300 mb-4">{category}</h4>
-                  <div className="space-y-3">
+                <Card className="p-3 sm:p-4 lg:p-6 h-full ultra-smooth-card border-purple-500/40">
+                  <h4 className="text-sm sm:text-base lg:text-lg font-bold text-purple-300 mb-3 sm:mb-4 text-center sm:text-left">{category}</h4>
+                  <div className="space-y-2 sm:space-y-3">
                     {toolList.map((tool, toolIndex) => (
                       <motion.div
                         key={toolIndex}
-                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-500/25"
+                        className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-purple-500/25 w-full"
                         whileHover={{ 
                           x: 4, 
                           scale: 1.01,
@@ -338,7 +341,7 @@ export default function ExperienceSection() {
                         <motion.img 
                           src={tool.logo} 
                           alt={tool.name}
-                          className="w-8 h-8 rounded-lg object-cover flex-shrink-0 silky-image"
+                          className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 rounded-md sm:rounded-lg object-cover flex-shrink-0 silky-image"
                           whileHover={{ 
                             scale: 1.1, 
                             rotate: 5,
@@ -349,7 +352,7 @@ export default function ExperienceSection() {
                             }
                           }}
                         />
-                        <span className="text-white/90 font-medium text-sm sm:text-base">{tool.name}</span>
+                        <span className="text-white/90 font-medium text-xs xs:text-sm sm:text-base truncate">{tool.name}</span>
                       </motion.div>
                     ))}
                   </div>

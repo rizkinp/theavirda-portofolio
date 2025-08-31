@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
 
 // Tab Categories Configuration - Easy to modify
 const tabCategories = [
@@ -185,9 +185,9 @@ export default function PortfolioSection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 px-2 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -201,20 +201,20 @@ export default function PortfolioSection() {
           <p className="text-white/90 text-base sm:text-lg">Detailed work showcase across different companies</p>
         </motion.div>
 
-        <div className="space-y-12 sm:space-y-20">
+        <div className="space-y-8 sm:space-y-12 lg:space-y-20">
           {companies.map((company, companyIndex) => (
             <motion.div
               key={company.id}
-              className="glass-card rounded-3xl p-4 sm:p-6 lg:p-8 border border-purple-500/40 motion-glow"
+              className="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 border border-purple-500/40 motion-glow"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: companyIndex * 0.2, ease: "easeOut" }}
             >
               {/* Company Header */}
-              <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 mb-8 sm:mb-12">
+              <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 lg:mb-12">
                 <motion.div
-                  className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden flex-shrink-0"
+                  className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0"
                   whileHover={{ scale: 1.08, rotate: 3 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
@@ -224,9 +224,9 @@ export default function PortfolioSection() {
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
-                <div className="flex-1 text-center lg:text-left">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gradient-primary mb-3 sm:mb-4">{company.name}</h3>
-                  <p className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">{company.description}</p>
+                <div className="flex-1 text-center lg:text-left px-2 sm:px-0">
+                  <h3 className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gradient-primary mb-2 sm:mb-3 lg:mb-4 leading-tight">{company.name}</h3>
+                  <p className="text-white/90 text-xs xs:text-sm sm:text-base lg:text-lg leading-relaxed">{company.description}</p>
                 </div>
               </div>
 
@@ -234,45 +234,148 @@ export default function PortfolioSection() {
               {(() => {
                 const availableTabs = getAvailableTabs(company);
                 const firstTabKey = availableTabs[0]?.key || 'shortVideos';
+                const [activeTab, setActiveTab] = useState(firstTabKey);
                 
                 return (
-                  <Tabs defaultValue={firstTabKey} className="w-full">
-                    <TabsList 
-                      className={`grid w-full mb-6 sm:mb-8 bg-purple-500/20 border border-purple-500/40`}
-                      style={{ gridTemplateColumns: `repeat(${availableTabs.length}, 1fr)` }}
-                    >
-                      {availableTabs.map((tab) => (
-                        <TabsTrigger 
-                          key={tab.key}
-                          value={tab.key} 
-                          className="text-xs sm:text-sm text-white/80 data-[state=active]:text-purple-300 data-[state=active]:bg-purple-500/40 flex items-center gap-2"
-                        >
-                          <span className="hidden sm:inline">{tab.icon}</span>
-                          <span className="truncate">{tab.label}</span>
-                        </TabsTrigger>
-                      ))}
-                    </TabsList>
+                  <div className="w-full">
+                    {/* Mobile-optimized tab list */}
+                    {availableTabs.length <= 2 ? (
+                      <div 
+                        className="grid w-full mb-4 sm:mb-6 lg:mb-8 bg-purple-500/20 border border-purple-500/40 h-auto min-h-[44px] sm:min-h-[48px] rounded-lg"
+                        style={{ gridTemplateColumns: `repeat(${availableTabs.length}, 1fr)` }}
+                      >
+                        {availableTabs.map((tab) => (
+                          <motion.button
+                            key={tab.key}
+                            onClick={() => setActiveTab(tab.key)}
+                            className={`text-xs xs:text-sm sm:text-base flex items-center justify-center gap-1 sm:gap-2 px-2 py-2 sm:py-3 min-h-[40px] sm:min-h-[44px] rounded-lg transition-all duration-200 ${
+                              activeTab === tab.key 
+                                ? 'text-purple-300 bg-purple-500/40' 
+                                : 'text-white/80 hover:text-white hover:bg-purple-500/20'
+                            }`}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <span className="text-xs xs:text-sm sm:text-base">{tab.icon}</span>
+                            <span className="truncate text-xs xs:text-sm sm:text-base leading-tight">{tab.label}</span>
+                          </motion.button>
+                        ))}
+                      </div>
+                    ) : (
+                      // Scrollable tabs for mobile when there are many tabs
+                      <div className="mb-4 sm:mb-6 lg:mb-8">
+                        <div className="flex overflow-x-auto scrollbar-hide gap-2 pb-2 sm:pb-3 px-1">
+                          {availableTabs.map((tab) => (
+                            <motion.button
+                              key={tab.key}
+                              onClick={() => setActiveTab(tab.key)}
+                              className={`text-xs xs:text-sm sm:text-base flex items-center gap-1 sm:gap-2 px-2 xs:px-3 sm:px-4 py-2 sm:py-3 border border-purple-500/40 rounded-lg whitespace-nowrap flex-shrink-0 min-w-fit transition-all duration-200 ${
+                                activeTab === tab.key 
+                                  ? 'text-purple-300 bg-purple-500/40' 
+                                  : 'text-white/80 bg-purple-500/20 hover:text-white hover:bg-purple-500/30'
+                              }`}
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <span className="text-xs xs:text-sm sm:text-base">{tab.icon}</span>
+                              <span className="text-xs xs:text-sm sm:text-base">{tab.label}</span>
+                            </motion.button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-                {Object.entries(company.sections).map(([sectionKey, section]) => (
-                  <TabsContent key={sectionKey} value={sectionKey}>
-                    <Card className="p-4 sm:p-6 glass-card border-purple-500/40 motion-glow">
-                      <h4 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 capitalize">
-                        {sectionKey.replace(/([A-Z])/g, ' $1').trim()}
-                      </h4>
-                      <p className="text-white/90 mb-4 sm:mb-6 text-sm sm:text-base lg:text-lg leading-relaxed">
-                        {section.description}
-                      </p>
-                      
-                      {/* Image Grid - Portrait Layout */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
-                        {section.images.map((image, imageIndex) => (
+                {Object.entries(company.sections).map(([sectionKey, section]) => {
+                  if (sectionKey !== activeTab) return null;
+                  
+                  return (
+                    <motion.div
+                      key={sectionKey}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Card className="p-3 sm:p-4 lg:p-6 glass-card border-purple-500/40 motion-glow">
+                        <h4 className="text-lg xs:text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 lg:mb-4 capitalize px-1 sm:px-0">
+                          {sectionKey.replace(/([A-Z])/g, ' $1').trim()}
+                        </h4>
+                        <p className="text-white/90 mb-3 sm:mb-4 lg:mb-6 text-xs xs:text-sm sm:text-base lg:text-lg leading-relaxed px-1 sm:px-0">
+                          {section.description}
+                        </p>
+                        
+                        {/* Image Grid - Portrait Layout - Mobile optimized */}
+                        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 xs:gap-3 sm:gap-4">
+                          {section.images.map((image, imageIndex) => (
+                            <motion.div
+                              key={imageIndex}
+                              className="aspect-[3/4] bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-lg sm:rounded-xl overflow-hidden cursor-pointer group relative ultra-smooth-card"
+                              whileHover={{ 
+                                scale: 1.015, 
+                                rotate: 0.5,
+                                y: -2,
+                                transition: {
+                                  type: "spring",
+                                  stiffness: 400,
+                                  damping: 30,
+                                  mass: 0.8
+                                }
+                              }}
+                              whileTap={{ 
+                                scale: 0.98,
+                                transition: {
+                                  type: "spring",
+                                  stiffness: 600,
+                                  damping: 25
+                                }
+                              }}
+                              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                              whileInView={{ 
+                                opacity: 1, 
+                                scale: 1, 
+                                y: 0,
+                                transition: {
+                                  type: "spring",
+                                  stiffness: 200,
+                                  damping: 25,
+                                  delay: imageIndex * 0.05
+                                }
+                              }}
+                              viewport={{ once: true, margin: "-30px" }}
+                            >
+                              <motion.img 
+                                src={image} 
+                                alt={`${sectionKey} ${imageIndex + 1}`}
+                                className="w-full h-full object-cover silky-image"
+                                loading="lazy"
+                                whileHover={{
+                                  scale: 1.015,
+                                  transition: {
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30
+                                  }
+                                }}
+                              />
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-purple-500/10 to-transparent"
+                                initial={{ opacity: 0 }}
+                                whileHover={{ 
+                                  opacity: 1,
+                                  transition: {
+                                    duration: 0.6,
+                                    ease: [0.19, 1, 0.22, 1]
+                                  }
+                                }}
+                              />
+                            </motion.div>
+                          ))}
+                          
+                          {/* Add more placeholder */}
                           <motion.div
-                            key={imageIndex}
-                            className="aspect-[3/4] bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-xl overflow-hidden cursor-pointer group relative ultra-smooth-card"
+                            className="aspect-[3/4] bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-lg sm:rounded-xl flex items-center justify-center border-2 border-dashed border-purple-500/50 cursor-pointer group relative overflow-hidden ultra-smooth-card"
                             whileHover={{ 
-                              scale: 1.02, 
-                              rotate: 0.5,
-                              y: -4,
+                              scale: 1.015,
+                              y: -2,
                               transition: {
                                 type: "spring",
                                 stiffness: 400,
@@ -288,104 +391,42 @@ export default function PortfolioSection() {
                                 damping: 25
                               }
                             }}
-                            initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                            whileInView={{ 
-                              opacity: 1, 
-                              scale: 1, 
-                              y: 0,
-                              transition: {
-                                type: "spring",
-                                stiffness: 200,
-                                damping: 25,
-                                delay: imageIndex * 0.05
-                              }
-                            }}
-                            viewport={{ once: true, margin: "-30px" }}
                           >
-                            <motion.img 
-                              src={image} 
-                              alt={`${sectionKey} ${imageIndex + 1}`}
-                              className="w-full h-full object-cover silky-image"
-                              loading="lazy"
-                              whileHover={{
-                                scale: 1.015,
+                            <motion.span 
+                              className="text-purple-300 text-lg xs:text-xl sm:text-2xl relative z-10"
+                              whileHover={{ 
+                                rotate: 180,
+                                scale: 1.1,
+                                color: "rgb(196 181 253)",
                                 transition: {
                                   type: "spring",
                                   stiffness: 300,
-                                  damping: 30
+                                  damping: 20
                                 }
                               }}
-                            />
+                            >
+                              +
+                            </motion.span>
                             <motion.div
-                              className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-purple-500/10 to-transparent"
-                              initial={{ opacity: 0 }}
+                              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg sm:rounded-xl"
+                              initial={{ opacity: 0, scale: 0.8 }}
                               whileHover={{ 
                                 opacity: 1,
+                                scale: 1,
                                 transition: {
-                                  duration: 0.6,
-                                  ease: [0.19, 1, 0.22, 1]
+                                  type: "spring",
+                                  stiffness: 200,
+                                  damping: 25
                                 }
                               }}
                             />
                           </motion.div>
-                        ))}
-                        
-                        {/* Add more placeholder */}
-                        <motion.div
-                          className="aspect-[3/4] bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center border-2 border-dashed border-purple-500/50 cursor-pointer group relative overflow-hidden ultra-smooth-card"
-                          whileHover={{ 
-                            scale: 1.02,
-                            y: -4,
-                            transition: {
-                              type: "spring",
-                              stiffness: 400,
-                              damping: 30,
-                              mass: 0.8
-                            }
-                          }}
-                          whileTap={{ 
-                            scale: 0.98,
-                            transition: {
-                              type: "spring",
-                              stiffness: 600,
-                              damping: 25
-                            }
-                          }}
-                        >
-                          <motion.span 
-                            className="text-purple-300 text-xl sm:text-2xl relative z-10"
-                            whileHover={{ 
-                              rotate: 180,
-                              scale: 1.1,
-                              color: "rgb(196 181 253)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 300,
-                                damping: 20
-                              }
-                            }}
-                          >
-                            +
-                          </motion.span>
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileHover={{ 
-                              opacity: 1,
-                              scale: 1,
-                              transition: {
-                                type: "spring",
-                                stiffness: 200,
-                                damping: 25
-                              }
-                            }}
-                          />
-                        </motion.div>
-                      </div>
-                    </Card>
-                  </TabsContent>
-                ))}
-                  </Tabs>
+                        </div>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+                  </div>
                 );
               })()}
             </motion.div>

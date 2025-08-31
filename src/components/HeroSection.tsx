@@ -60,11 +60,11 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between min-h-[80vh] gap-8 lg:gap-12">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-6 xs:py-8 sm:py-12 md:py-16 lg:py-20 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between min-h-[70vh] xs:min-h-[75vh] sm:min-h-[80vh] gap-4 xs:gap-6 sm:gap-8 lg:gap-12">
           {/* Text Content */}
           <motion.div
-            className="w-full lg:w-1/2 text-center lg:text-left order-2 lg:order-1"
+            className="w-full lg:w-1/2 text-center lg:text-left order-2 lg:order-1 px-1 xs:px-2 sm:px-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -81,7 +81,7 @@ export default function HeroSection() {
             </motion.div>
             
             <motion.h1
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 leading-tight"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight break-words"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -112,7 +112,7 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.p
-              className="text-gray-200 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0"
+              className="text-gray-200 text-sm xs:text-base sm:text-lg leading-relaxed max-w-full xs:max-w-sm sm:max-w-md lg:max-w-lg mx-auto lg:mx-0 px-4 sm:px-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
@@ -123,14 +123,14 @@ export default function HeroSection() {
 
           {/* Photo Section */}
           <motion.div
-            className="w-full lg:w-1/2 flex justify-center order-1 lg:order-2"
+            className="w-full lg:w-1/2 flex justify-center order-1 lg:order-2 px-2 xs:px-4 sm:px-0"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="relative">
               <motion.div
-                className="w-64 sm:w-80 h-80 sm:h-96 bg-gradient-to-br from-purple-600/30 to-pink-600/30 rounded-3xl overflow-hidden relative glass-purple motion-scale"
+                className="w-40 xs:w-48 sm:w-56 md:w-64 lg:w-72 h-52 xs:h-60 sm:h-72 md:h-80 lg:h-88 bg-gradient-to-br from-purple-600/30 to-pink-600/30 rounded-2xl sm:rounded-3xl overflow-hidden relative glass-purple motion-scale"
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 transition={{ duration: 0.3 }}
               >

@@ -69,7 +69,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 relative z-10">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
