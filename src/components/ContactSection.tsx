@@ -13,7 +13,7 @@ const contactData = [
     action: () => {
       try {
         // WhatsApp deep link - works on both mobile and desktop
-        const phoneNumber = '628222902671'; // Remove + for WhatsApp API
+        const phoneNumber = '6282229026711'; // Remove + for WhatsApp API
         const message = 'Hi! I saw your portfolio and would like to discuss a project.';
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         
@@ -23,7 +23,7 @@ const contactData = [
       } catch (error) {
         console.error('Failed to open WhatsApp:', error);
         // Fallback: copy number to clipboard
-        navigator.clipboard?.writeText('+628222902671');
+        navigator.clipboard?.writeText('+6282229026711');
       }
     }
   },
